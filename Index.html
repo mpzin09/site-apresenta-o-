@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Última Ceia - Leonardo da Vinci</title>
+<style>
+  /* Fundo gradiente animado */
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    background: linear-gradient(270deg, #ffecd2, #fcb69f, #a1c4fd);
+    background-size: 600% 600%;
+    animation: gradientBG 20s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  header {
+    background: rgba(34, 34, 34, 0.9);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 5px solid #ffcc00;
+  }
+  header h1 {
+    font-size: 3rem;
+    margin: 0;
+    opacity: 0;
+    animation: fadeInDown 1.2s forwards;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+  header p {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    color: #ddd;
+    opacity: 0;
+    animation: fadeInUp 1.5s forwards;
+  }
+
+  @keyframes fadeInDown {
+    from {opacity: 0; transform: translateY(-40px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(40px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  nav {
+    background: rgba(51,51,51,0.95);
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  }
+  nav a {
+    color: white;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    background: #ffcc00;
+    color: #222;
+    transform: scale(1.1);
+  }
+
+  section {
+    padding: 70px 20px;
+    max-width: 1000px;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-in-out;
+  }
+  section.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  h2 {
+    color: #222;
+    border-left: 5px solid #ffcc00;
+    padding-left: 12px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    transition: color 0.5s;
+  }
+  h2:hover {
+    color: #ff6600;
+  }
+
+  p {
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+  }
+  p:hover {
+    transform: scale(1.02);
+  }
+
+  .img-container {
+    position: relative;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .img-container img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    transition: transform 0.6s, filter 0.6s, box-shadow 0.6s;
+    cursor: pointer;
+  }
+  .img-container img:hover {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.5);
+  }
+  .img-container span {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: 0.5s;
+    font-size: 0.95rem;
+  }
+  .img-container:hover span {
+    opacity: 1;
+  }
+
+  /* Seção de curiosidades */
+  .curiosidades {
+    background: rgba(255, 255, 255, 0.8);
+    border-left: 5px solid #ff6600;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  footer {
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(90deg, #222, #444, #222);
+    color: white;
+    margin-top: 40px;
+    background-size: 300% 300%;
+    animation: gradientMove 6s infinite alternate;
+  }
+  @keyframes gradientMove {
+    from {background-position: left;}
+    to {background-position: right;}
+  }
+
+  #topBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ffcc00;
+    color: #222;
+    border: none;
+    border-radius: 50%;
+    padding: 14px 16px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: none;
+    transition: 0.3s;
+  }
+  #topBtn:hover {
+    background: #222;
+    color: #ffcc00;
+    transform: scale(1.1);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>A Última Ceia</h1>
+  <p>Leonardo da Vinci</p>
+</header>
+
+<nav>
+  <a href="#analise">Análise Formal</a>
+  <a href="#contexto">Contexto Histórico</a>
+  <a href="#biografia">Biografia</a>
+  <a href="#influencias">Influências</a>
+  <a href="#curiosidades">Curiosidades ✨</a>
+</nav>
+
+<section id="analise">
+  <h2>Análise Formal</h2>
+  <p>
+    A Última Ceia é uma pintura mural feita por Leonardo da Vinci entre 1495 e 1498.
+    A obra retrata o momento em que Jesus anuncia que um de seus discípulos o trairá.
+    A composição é marcada pela simetria, pelo uso da perspectiva centralizada em Cristo
+    e pela expressividade única de cada apóstolo.
+  </p>
+  <div class="img-container">
+    <img src="https://s11.aconvert.com/convert/p3r68-cdx67/tegjp-icz8a.jpg" alt="A Última Ceia">
+    <span>A Última Ceia - Leonardo da Vinci</span>
+  </div>
+</section>
+
+<section id="contexto">
+  <h2>Contexto Histórico</h2>
+  <p>
+    A pintura foi encomendada por Ludovico Sforza, duque de Milão, para o refeitório
+    do convento de Santa Maria delle Grazie. Criada no auge do Renascimento, une ciência,
+    perspectiva e emoção. Apesar da técnica inovadora, a obra sofreu forte deterioração
+    ao longo dos séculos.
+  </p>
+  <div class="img-container">
+    <img src="https://s11.aconvert.com/convert/p3r68-cdx67/xtk5b-wdwaj.jpg" alt="Convento Santa Maria delle Grazie">
+    <span>Convento de Santa Maria delle Grazie</span>
+  </div>
+</section>
+
+<section id="biografia">
+  <h2>Biografia de Leonardo da Vinci</h2>
+  <p>
+    Leonardo da Vinci (1452–1519) foi pintor, inventor e cientista italiano.
+    Considerado o maior gênio do Renascimento, destacou-se pela curiosidade insaciável
+    e genialidade artística. Além de <em>A Última Ceia</em>, pintou a <em>Mona Lisa</em> 
+    e realizou estudos anatômicos e engenhos mecânicos que marcaram a história.
+  </p>
+  <div class="img-container">
+    <img src="https://s11.aconvert.com/convert/p3r68-cdx67/y4s9r-fgj8n.jpg" alt="Leonardo da Vinci">
+    <span>Retrato de Leonardo da Vinci</span>
+  </div>
+</section>
+
+<section id="influencias">
+  <h2>Influências</h2>
+  <p>
+    A Última Ceia revolucionou a forma de representar narrativas religiosas,
+    influenciando artistas do Renascimento e períodos posteriores. Sua
+    naturalidade e técnica abriram espaço para novas formas de arte, tornando-a
+    uma das obras mais estudadas e reinterpretadas da história.
+  </p>
+  <div class="img-container">
+    <img src="https://s11.aconvert.com/convert/p3r68-cdx67/7kf88-bijqo.jpg" alt="Detalhe da Última Ceia">
+    <span>Detalhe da pintura</span>
+  </div>
+</section>
+
+<section id="curiosidades">
+  <h2>Curiosidades ✨</h2>
+  <div class="curiosidades">
+    <ul>
+      <li>Leonardo experimentou uma técnica de pintura sobre gesso seco, que causou rápida deterioração.</li>
+      <li>O apóstolo Judas está representado à direita de Cristo, afastado dos outros.</li>
+      <li>A obra foi alvo de restaurações intensas ao longo de séculos, incluindo bombardeios da Segunda Guerra.</li>
+      <li>É uma das pinturas mais reproduzidas e analisadas do mundo, servindo de inspiração em filmes e livros.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Site criado por Felipe, Rhuan e Marcos</p>
+</footer>
+
+<button id="topBtn">↑</button>
+
+<script>
+  // Animação suave ao rolar
+  const sections = document.querySelectorAll("section");
+  window.addEventListener("scroll", () => {
+    sections.forEach(sec => {
+      const secTop = sec.getBoundingClientRect().top;
+      if(secTop < window.innerHeight - 100){
+        sec.classList.add("show");
+      }
+    });
+    const topBtn = document.getElementById("topBtn");
+    if (window.scrollY > 400) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  });
+
+  document.getElementById("topBtn").addEventListener("click", () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+</script>
+</body>
+</html>
